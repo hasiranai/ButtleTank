@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestroyObject : MonoBehaviour
 {
+    public GameObject effectPrefab;
+
     // このメソッドはコライダー同士がぶつかった瞬間に呼び出される
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +18,12 @@ public class DestroyObject : MonoBehaviour
             // ぶつかってきたオブジェクトを破壊する
             // otherがどこに繋がっているか考えてみよう
             Destroy(other.gameObject);
+
+            // エフェクトを実体化する
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+
+            // エフェクトを2秒後に消す
+            Destroy(effect, 2.0f);
         }
     }
 }
