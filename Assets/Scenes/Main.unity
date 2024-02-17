@@ -870,6 +870,7 @@ MonoBehaviour:
   shotSpeed: 500
   enemyShellPrefab: {fileID: 4771813692318221566, guid: 759237e3fa82c4a6f971cf25f6db7bb2, type: 3}
   shotSound: {fileID: 8300000, guid: 12dd59a000092480aaae7a34f66c6383, type: 3}
+  interval: 100
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766695230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.06, y: 0, z: 0}
+  m_LocalPosition: {x: 4.06, y: 0, z: 0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1657,6 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db10cda5fa0a845baab2d954bf2f60c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetDis: 10
 --- !u!114 &1553210829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,6 +1849,7 @@ MonoBehaviour:
   shotSpeed: 500
   enemyShellPrefab: {fileID: 4771813692318221566, guid: 759237e3fa82c4a6f971cf25f6db7bb2, type: 3}
   shotSound: {fileID: 8300000, guid: 12dd59a000092480aaae7a34f66c6383, type: 3}
+  interval: 150
 --- !u!1 &1777250309
 GameObject:
   m_ObjectHideFlags: 0

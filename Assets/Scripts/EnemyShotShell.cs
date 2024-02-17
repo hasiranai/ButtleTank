@@ -10,6 +10,8 @@ public class EnemyShotShell : MonoBehaviour
 
     public AudioClip shotSound;
 
+    public int interval;
+
     private int count;
 
     void Update()
@@ -17,7 +19,7 @@ public class EnemyShotShell : MonoBehaviour
         count += 1;
 
         // 「%」と「==」の意味を考えよう(ポイント)
-        if (count % 100 == 0)
+        if (count % interval == 0)
         {
             GameObject enemyShell = Instantiate(enemyShellPrefab, transform.position, Quaternion.identity);
             Rigidbody enemyShellRb = enemyShell.GetComponent<Rigidbody>();
