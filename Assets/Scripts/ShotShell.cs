@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;    // 追加
 
 public class ShotShell : MonoBehaviour
 {
@@ -8,10 +9,19 @@ public class ShotShell : MonoBehaviour
     public GameObject shellPrefab;
     public AudioClip shotSound;
 
+    public int shotCount;
+
+    public TextMeshProUGUI shellLabel;
+
     private float interval = 0.75f;
 
     private float timer = 0;
-   
+
+    private void Start()  // 「S」は大文字を確認！
+    {
+        shellLabel.text = "" + shotCount;
+    }
+
     void Update()
     {
         // タイマーの時間を動かす
@@ -20,8 +30,15 @@ public class ShotShell : MonoBehaviour
         // もしもSpaceキーを押したならば(条件)
         // 「Space」の部分を変更することで他のキーにすることができる(ポイント)
         // 条件追加　「&&」の意味を復習しよう
-        if (Input.GetKeyDown(KeyCode.Space) && timer > interval)
+        // 条件(&& shotCount > 0)の追加
+        if (Input.GetKeyDown(KeyCode.Space) && timer > interval && shotCount > 0)
         {
+            // *追加
+            shotCount -= 1;
+
+            // *追加
+            shellLabel.text = "" + shotCount;
+
             // タイマーの時間を０に戻す
             timer = 0.0f;
 
