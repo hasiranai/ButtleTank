@@ -9,16 +9,21 @@ public class ShotShell : MonoBehaviour
     public GameObject shellPrefab;
     public AudioClip shotSound;
 
-    public int shotCount;
-
     public TextMeshProUGUI shellLabel;
 
     private float interval = 0.75f;
 
     private float timer = 0;
 
+    private int shotCount;
+
+    // 弾数の最大値の設定(最大値は自由)
+    private int shotMaxCount = 20;
+
     private void Start()  // 「S」は大文字を確認！
     {
+        shotCount = shotMaxCount;
+
         shellLabel.text = "" + shotCount;
     }
 
@@ -58,5 +63,23 @@ public class ShotShell : MonoBehaviour
             // 砲弾の発射音を出す
             AudioSource.PlayClipAtPoint(shotSound, transform.position);
         }
+    }
+
+    // 残弾数を回復させるメソッド
+    // このメソッドは外部からアクセスできるように「public」をつける（重要）
+    // このメソッドをShellItemスクリプトから呼び出す
+    public void AddShell(int amount)
+    {
+        // shotCountをamount分だけ回復させる
+        shotCount += amount;
+
+        // ただし、最大値を超えないようにする
+        if (shotCount > shotMaxCount)
+        {
+            shotCount = shotMaxCount;
+        }
+
+        // 回復をUIに反映させる
+        shellLabel.text = "" + shotCount;
     }
 }

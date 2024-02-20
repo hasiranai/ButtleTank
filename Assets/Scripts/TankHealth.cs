@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;  // 追加
+using TMPro;                        // 追加
 
 public class TankHealth : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class TankHealth : MonoBehaviour
 
     public int tankHP;
 
+    public TextMeshProUGUI hpLabel;
+
+    private void Start()
+    {
+        hpLabel.text = "" + tankHP;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // もしもぶつかってきた相手のTagが”EnemyShell”であったならば(条件)
@@ -18,6 +26,8 @@ public class TankHealth : MonoBehaviour
         {
             // HPを１ずつ減少させる
             tankHP -= 1;
+
+            hpLabel.text = "" + tankHP;
 
             // ぶつかってきた相手方(敵の砲弾)を破壊する
             Destroy(other.gameObject);
