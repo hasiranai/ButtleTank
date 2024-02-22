@@ -14,8 +14,12 @@ public class TankHealth : MonoBehaviour
 
     public TextMeshProUGUI hpLabel;
 
+    private int tankMaxHP = 10;  // 最大値は自由
+
     private void Start()
     {
+        tankHP = tankMaxHP;
+
         hpLabel.text = "" + tankHP;
     }
 
@@ -58,5 +62,18 @@ public class TankHealth : MonoBehaviour
     void GoToGameOver()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    // publicをつける（意味は復習しよう）
+    public void AddHP(int amount)
+    {
+        tankHP += amount;
+
+        // ここは何をコントロールしているでしょうか？
+        if (tankHP > tankMaxHP)
+        {
+            tankHP = tankMaxHP;
+        }
+        hpLabel.text = "" + tankHP;
     }
 }
