@@ -14,12 +14,23 @@ public class EnemyShotShell : MonoBehaviour
 
     private int count;
 
+    private float stopTimer = 5.0f;  // 何秒間停止させるかは自由
+
     void Update()
     {
         count += 1;
 
+        stopTimer -= Time.deltaTime;
+
+        // ここの意味を考えてみよう
+        if (stopTimer < 0)
+        {
+            stopTimer = 0;
+        }
+
         // 「%」と「==」の意味を考えよう(ポイント)
-        if (count % interval == 0)
+        // 条件の追加
+        if (count % 100 == 0 && stopTimer <= 0)
         {
             GameObject enemyShell = Instantiate(enemyShellPrefab, transform.position, Quaternion.identity);
             Rigidbody enemyShellRb = enemyShell.GetComponent<Rigidbody>();
@@ -31,5 +42,13 @@ public class EnemyShotShell : MonoBehaviour
 
             Destroy(enemyShell, 3.0f);
         }
+    }
+
+    // 敵の攻撃を停止させるメソッド
+    // （復習）このメソッドは外部からアクセスできるように「public」をつける（重要）
+    // （復習）このメソッドをStopAttackItemスクリプトを呼び出す
+    public void AddStopTimer(float amount)
+    {
+        stopTimer += amount;
     }
 }
