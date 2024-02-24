@@ -10,7 +10,7 @@ public class HPItem : MonoBehaviour
 
     private TankHealth th;
 
-    private int reward = 3;  // いくつ回復させるかは自由！
+    public int reward = 3;  // いくつ回復させるかは自由！
 
     private void OnTriggerEnter(Collider other)
     {

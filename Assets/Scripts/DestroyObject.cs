@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class DestroyObject : MonoBehaviour
     public GameObject effectPrefab2;  // 2種類目のエフェクトを入れるための箱
 
     public int objectHP;
+
+    public GameObject itemPrefab;
 
     // このメソッドはコライダー同士がぶつかった瞬間に呼び出される
     private void OnTriggerEnter(Collider other)
@@ -38,6 +41,10 @@ public class DestroyObject : MonoBehaviour
                 Destroy(effect2, 0.2f);
 
                 Destroy(this.gameObject);
+
+                // （ポイント）pos.y + 0.6fのコードでアイテムの出現場所の「高さ」を調整しています
+                Vector3 pos = transform.position;
+                Instantiate(itemPrefab, new Vector3(pos.x, pos.y + 0.8f, pos.z), Quaternion.identity);
             }
 
             // このスクリプトがついているオブジェクトを破壊する(thisは省略が可能)
@@ -53,5 +60,10 @@ public class DestroyObject : MonoBehaviour
             // エフェクトを2秒後に消す
           //  Destroy(effect, 2.0f);
         }
+    }
+
+    private void Instantiate(GameObject itemPrefab, Vector3 vector3)
+    {
+        throw new NotImplementedException();
     }
 }
