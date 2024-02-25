@@ -11,7 +11,7 @@ public class DestroyObject : MonoBehaviour
 
     public int objectHP;
 
-    public GameObject itemPrefab;
+    public GameObject[] itemPrefabs;   // 配列・・・＞複数のデータを入れることができる箱
 
     // このメソッドはコライダー同士がぶつかった瞬間に呼び出される
     private void OnTriggerEnter(Collider other)
@@ -42,28 +42,32 @@ public class DestroyObject : MonoBehaviour
 
                 Destroy(this.gameObject);
 
-                // （ポイント）pos.y + 0.6fのコードでアイテムの出現場所の「高さ」を調整しています
-                Vector3 pos = transform.position;
-                Instantiate(itemPrefab, new Vector3(pos.x, pos.y + 0.8f, pos.z), Quaternion.identity);
+                // ランダムメソッドの使い方を学習しよう
+                // itemNumberが「０〜９９」のいずれかになるように改良する時は「itemPrefabs.Length」の部分を「100」に書き換える
+                int itemNumber = UnityEngine.Random.Range(0, itemPrefabs.Length);
+
+                if (itemPrefabs.Length != 0)
+                {
+                    // （ポイント）pos.y + 0.6fのコードでアイテムの出現場所の「高さ」を調整しています
+                    Vector3 pos = transform.position;
+
+                    // itemNumberの数字によって、出るアイテムが変化する（ポイント）
+                    Instantiate(itemPrefabs[itemNumber], new Vector3(pos.x, pos.y + 0.8f, pos.z), Quaternion.identity);
+
+                    // StopAttackItemの出現確率・・・＞１０％
+                    //if (itemNumber < 10)
+                    //{
+                    //    Instantiate(itemPrefabs[2], new Vector3(pos.x, pos.y + 0.8f, pos.z), Quaternion.identity);
+                    //}
+
+                    // ShellItemの出願確率・・・＞３０％
+                    //else if (itemNumber < 40)
+                    //{
+                    //    Instantiate(itemPrefabs[1], new Vector3(pos.x, pos.y + 0.8f, pos.z), Quaternion.identity);
+                    //}
+                    // HPItemの出現確率・・・＞３０％
+                }
             }
-
-            // このスクリプトがついているオブジェクトを破壊する(thisは省略が可能)
-           // Destroy(this.gameObject);
-
-            // ぶつかってきたオブジェクトを破壊する
-            // otherがどこに繋がっているか考えてみよう
-          //  Destroy(other.gameObject);
-
-            // エフェクトを実体化する
-          //  GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-
-            // エフェクトを2秒後に消す
-          //  Destroy(effect, 2.0f);
         }
-    }
-
-    private void Instantiate(GameObject itemPrefab, Vector3 vector3)
-    {
-        throw new NotImplementedException();
     }
 }
