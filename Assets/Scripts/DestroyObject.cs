@@ -13,6 +13,14 @@ public class DestroyObject : MonoBehaviour
 
     public GameObject[] itemPrefabs;   // 配列・・・＞複数のデータを入れることができる箱
 
+    public int scoreValue;  // 得点数は自由に設定しましょう
+    private ScoreManager sm;
+
+    private void Start()
+    {
+        sm = GameObject.Find("ScoreLabel").GetComponent<ScoreManager>();
+    }
+
     // このメソッドはコライダー同士がぶつかった瞬間に呼び出される
     private void OnTriggerEnter(Collider other)
     {
@@ -41,6 +49,8 @@ public class DestroyObject : MonoBehaviour
                 Destroy(effect2, 0.2f);
 
                 Destroy(this.gameObject);
+
+                sm.AddScore(scoreValue);
 
                 // ランダムメソッドの使い方を学習しよう
                 // itemNumberが「０〜９９」のいずれかになるように改良する時は「itemPrefabs.Length」の部分を「100」に書き換える
