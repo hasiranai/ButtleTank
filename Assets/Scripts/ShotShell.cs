@@ -20,11 +20,16 @@ public class ShotShell : MonoBehaviour
     // 弾数の最大値の設定(最大値は自由)
     private int shotMaxCount = 20;
 
+    private AudioSource audioS;   // 発射音
+
     private void Start()  // 「S」は大文字を確認！
     {
         shotCount = shotMaxCount;
 
         shellLabel.text = "" + shotCount;
+
+        // 発射音
+        audioS = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -60,8 +65,12 @@ public class ShotShell : MonoBehaviour
             // (重要な考え方)不要になった砲弾はメモリー上から削除すること
             Destroy(shell, 3.0f);
 
-            // 砲弾の発射音を出す
-            AudioSource.PlayClipAtPoint(shotSound, transform.position);
+            // 発射音
+            audioS.volume = 0.3f;
+            audioS.PlayOneShot(shotSound);
+
+            // 砲弾の発射音を出す(使用しないのでコメントアウト)
+            //AudioSource.PlayClipAtPoint(shotSound, transform.position);
         }
     }
 
