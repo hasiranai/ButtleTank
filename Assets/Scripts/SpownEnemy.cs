@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class SpownEnemy : MonoBehaviour
 {
-    //public int spownInterval;
+    public int spownInterval;
 
+    public GameObject EnemyPrefab;
 
+    private int spncount;
 
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
-    // Update is called once per frame
     void Update()
     {
-        
+        spncount += 1;
+
+        if (spncount % 500 == 0)
+        {
+            GameObject EnemyB = Instantiate(EnemyPrefab, transform.position, Quaternion.identity);
+        }
     }
 }
